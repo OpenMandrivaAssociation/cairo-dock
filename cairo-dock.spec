@@ -5,6 +5,7 @@ Release:	%mkrel 2
 License:	GPLv3+
 Group:		Graphical desktop/Other
 Source0: 	http://download.berlios.de/cairo-dock/%name-%version.tar.bz2
+Patch0:		cairo-dock-1.6.1.2-use-correct-xdg-menu-dir.patch
 URL:		http://www.cairo-dock.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	librsvg-devel
@@ -52,6 +53,7 @@ This package provides the include files and library for cairo-dock functions.
 #---------------------------------------------------------------------
 %prep
 %setup -q
+%patch0 -p0
 
 %build
 %configure2_5x
