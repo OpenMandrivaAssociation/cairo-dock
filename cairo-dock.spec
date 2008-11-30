@@ -1,6 +1,6 @@
 Summary:	A light and eye-candy dock to launch your programs easily
 Name:     	cairo-dock
-Version:	1.6.2.3
+Version:	1.6.3.1
 Release:	%mkrel 1
 License:	GPLv3+
 Group:		Graphical desktop/Other
