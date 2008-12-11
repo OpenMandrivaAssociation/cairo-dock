@@ -14,7 +14,7 @@ BuildRequires:	libxtst-devel
 BuildRequires:	dbus-glib-devel
 BuildRequires:	glitz-devel
 BuildRequires:	intltool
-BuildRequires:	ImageMagick
+BuildRequires:	imagemagick
 Suggests:	cairo-dock-plugins
 Suggests:	cairo-dock-themes
 
