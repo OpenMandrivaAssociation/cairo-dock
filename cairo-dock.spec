@@ -1,18 +1,18 @@
 Summary:	A light and eye-candy dock to launch your programs easily
 Name:     	cairo-dock
-Version:	1.6.3.1
+Version:	2.0.3
 Release:	%mkrel 1
 License:	GPLv3+
 Group:		Graphical desktop/Other
 Source0: 	http://download.berlios.de/cairo-dock/%name-%version.tar.bz2
-Patch0:		cairo-dock-1.6.1.2-use-correct-xdg-menu-dir.patch
+Patch0:		cairo-dock-2.0.3-fix-str-fmt.patch
 URL:		http://www.cairo-dock.org/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	librsvg-devel
 BuildRequires:	gtk+2-devel
 BuildRequires:	libxtst-devel
 BuildRequires:	dbus-glib-devel
-BuildRequires:	glitz-devel
+BuildRequires:	gtkglext-devel
 BuildRequires:	intltool
 BuildRequires:	imagemagick
 Suggests:	cairo-dock-plugins
@@ -28,6 +28,7 @@ easily plug applets into it.
 %{_bindir}/*
 %{_datadir}/%name
 %{_datadir}/applications/*.desktop
+%{_datadir}/pixmaps/*.svg
 %{_iconsdir}/%name.png
 %{_miconsdir}/%name.png
 %{_liconsdir}/%name.png
@@ -64,18 +65,6 @@ rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
 %{find_lang} %{name}
-
-mkdir -p %buildroot%_datadir/applications/
-cat > %buildroot%_datadir/applications/mandriva-%name.desktop <<EOF
-[Desktop Entry]
-Name=Cairo Dock
-Comment=A light and eye-candy dock
-Exec=cairo-dock
-Icon=cairo-dock
-Terminal=false
-Type=Application
-Categories=GTK;Utility;
-EOF
 
 mkdir -p %buildroot{%_iconsdir,%_miconsdir,%_liconsdir}
 convert data/cairo-dock.svg -resize 48x48 %buildroot%_liconsdir/%name.png
