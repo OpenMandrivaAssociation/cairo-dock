@@ -1,6 +1,6 @@
 Summary:	A light and eye-candy dock to launch your programs easily
 Name:     	cairo-dock
-Version:	2.0.5
+Version:	2.0.6
 Release:	%mkrel 1
 License:	GPLv3+
 Group:		Graphical desktop/Other
@@ -26,6 +26,7 @@ easily plug applets into it.
 %files -f %{name}.lang
 %defattr(-, root, root)
 %{_bindir}/*
+%{_libdir}/*.so
 %{_datadir}/%name
 %{_datadir}/applications/*.desktop
 %{_datadir}/pixmaps/*.svg
@@ -49,6 +50,7 @@ This package provides the include files and library for cairo-dock functions.
 %files devel
 %defattr(-, root, root)
 %{_includedir}/%name
+%{_libdir}/*.la
 %{_libdir}/pkgconfig/*.pc
 
 #---------------------------------------------------------------------
@@ -57,7 +59,8 @@ This package provides the include files and library for cairo-dock functions.
 %patch0 -p0
 
 %build
-%configure2_5x
+autoreconf -fi
+%configure2_5x --disable-static
 %make
 
 %install
