@@ -1,12 +1,12 @@
 Summary:	A light and eye-candy dock to launch your programs easily
 Name:     	cairo-dock
-Version:	2.0.8.2
+Version:	2.1.2
 Release:	%mkrel 1
 License:	GPLv3+
 Group:		Graphical desktop/Other
-Source0: 	http://download.berlios.de/cairo-dock/%name-%version.tar.bz2
-Patch0:		cairo-dock-2.0.3-fix-str-fmt.patch
-URL:		http://www.cairo-dock.org/
+Source:		http://launchpad.net/cairo-dock-core/2.1/%{version}/+download/%{name}-%{version}-4.tar.gz
+Patch0:		cairo-dock-2.1.2-fix-str-fmt.patch
+URL:		https://launchpad.net/cairo-dock-core
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	librsvg-devel
 BuildRequires:	gtk+2-devel
@@ -55,11 +55,10 @@ This package provides the include files and library for cairo-dock functions.
 
 #---------------------------------------------------------------------
 %prep
-%setup -q
+%setup -qn %name-%version-4
 %patch0 -p0
 
 %build
-autoreconf -fi
 %configure2_5x --disable-static
 %make
 
