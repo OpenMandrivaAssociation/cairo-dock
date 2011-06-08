@@ -1,10 +1,10 @@
 Summary:	A light and eye-candy dock to launch your programs easily
 Name:     	cairo-dock
-Version:	2.2.0
+Version:	2.3.0
 Release:	%mkrel 1
 License:	GPLv3+
 Group:		Graphical desktop/Other
-Source:		http://launchpadlibrarian.net/56954298/cairo-dock-%{version}-4.tar.gz
+Source:		http://launchpadlibrarian.net/56954298/cairo-dock-%{version}~2.tar.gz
 Patch0:		cairo-dock-2.2.0-fix-str-fmt.patch
 URL:		https://launchpad.net/cairo-dock-core
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -81,7 +81,7 @@ This package provides the include files and library for cairo-dock functions.
 
 #---------------------------------------------------------------------
 %prep
-%setup -qn %name-%version-4
+%setup -qn %name-%version~2
 %patch0 -p0
 
 %build
