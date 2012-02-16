@@ -1,10 +1,11 @@
 Summary:	A light and eye-candy dock to launch your programs easily
 Name:     	cairo-dock
 Version:	2.4.0
-Release:	%mkrel 1
+Release:	2
 License:	GPLv3+
 Group:		Graphical desktop/Other
-Source:		http://launchpadlibrarian.net/56954298/%{name}-%{version}~2.tar.gz
+Source0:	http://launchpadlibrarian.net/56954298/%{name}-%{version}~2.tar.gz
+Patch0:		cairo-dock-2.4.0-glib-header-fix.patch
 URL:		https://launchpad.net/cairo-dock-core
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	librsvg-devel
@@ -81,6 +82,7 @@ This package provides the include files and library for cairo-dock functions.
 #---------------------------------------------------------------------
 %prep
 %setup -q -n %{name}-%{version}~2
+%patch0 -p1 -b .glib_h~
 
 %build
 %cmake
