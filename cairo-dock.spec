@@ -1,27 +1,32 @@
 Summary:	A light and eye-candy dock to launch your programs easily
 Name:     	cairo-dock
-Version:	2.4.0
-Release:	2
+Version:	3.0.0
+Release:	%mkrel 1
 License:	GPLv3+
 Group:		Graphical desktop/Other
-Source0:	http://launchpadlibrarian.net/56954298/%{name}-%{version}~2.tar.gz
-Patch0:		cairo-dock-2.4.0-glib-header-fix.patch
+Source:		http://launchpad.net/cairo-dock-core/3.0/%{version}/+download/cairo-dock-%{version}.tar.gz
 URL:		https://launchpad.net/cairo-dock-core
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	librsvg-devel
-BuildRequires:	gtk+2-devel
-BuildRequires:	libxtst-devel
-BuildRequires:	dbus-glib-devel
-BuildRequires:	gtkglext-devel
-BuildRequires:	curl-devel
-BuildRequires:	libxml2-devel
-BuildRequires:	libxcomposite-devel
-BuildRequires:	libxinerama-devel
-BuildRequires:	libxrender-devel
+Patch0:		cairo-dock-2.4.0~2-mga-fix-glib-include.patch
+Patch1:		cairo-dock-3.0.0-link.patch
+BuildRequires: pkgconfig(cairo)
+BuildRequires: pkgconfig(dbus-1)
+BuildRequires: pkgconfig(dbus-glib-1)
+BuildRequires: pkgconfig(gl)
+BuildRequires: pkgconfig(glu)
+BuildRequires: pkgconfig(gthread-2.0)
+BuildRequires: pkgconfig(gtk+-3.0)
+BuildRequires: pkgconfig(libcurl)
+BuildRequires: pkgconfig(librsvg-2.0)
+BuildRequires: pkgconfig(libxml-2.0)
+BuildRequires: pkgconfig(pangox)
+BuildRequires: pkgconfig(xcomposite)
+BuildRequires: pkgconfig(xinerama)
+BuildRequires: pkgconfig(xrender)
+BuildRequires: pkgconfig(xtst)
 BuildRequires:	intltool
 BuildRequires:	imagemagick
 BuildRequires:	cmake
-Suggests:	cairo-dock-plugins
+Suggests:	cairo-dock-plugins = %version
 Suggests:	cairo-dock-themes
 
 %description
@@ -30,32 +35,27 @@ acceleration. It's fully configurable and can be a taskbar too. You can
 easily plug applets into it.
 
 %files -f %{name}.lang
-%defattr(-, root, root)
 %{_bindir}/*
-%{_datadir}/%{name}
+%{_datadir}/%name
 %{_datadir}/applications/*.desktop
 %{_datadir}/pixmaps/*.svg
 %{_mandir}/man1/cairo-dock.1.*
-%{_iconsdir}/%{name}.png
-%{_miconsdir}/%{name}.png
-%{_liconsdir}/%{name}.png
 
 #---------------------------------------------------------------------
-%define major 2
+%define major 3
 %define libname %mklibname gldi %{major}
-%package -n %{libname}
+%package -n %libname
 Summary: Library files for cairo-dock
 Group: System/Libraries
 
-%description -n %{libname}
+%description -n %libname
 cairo-dock uses cairo to render nice graphics, and Glitz to use hardware
 acceleration. It's fully configurable and can be a taskbar too. You can
 easily plug applets into it.
 
 This package provides the libraries for cairo-dock functions.
 
-%files  -n %{libname}
-%defattr(-, root, root)
+%files  -n %libname
 %{_libdir}/libgldi.so.%{major}
 %{_libdir}/libgldi.so.%{major}.*
 
@@ -63,8 +63,8 @@ This package provides the libraries for cairo-dock functions.
 %package devel
 Summary: Development files for cairo-dock
 Group: Development/Other
-Requires: %{name} = %{version}
-Requires: %{libname} = %{version}
+Requires: %name = %version
+Requires: %libname = %version
 
 %description devel
 cairo-dock uses cairo to render nice graphics, and Glitz to use hardware
@@ -74,30 +74,21 @@ easily plug applets into it.
 This package provides the include files and library for cairo-dock functions.
 
 %files devel
-%defattr(-, root, root)
-%{_includedir}/%{name}
+%{_includedir}/%name
 %{_libdir}/libgldi.so
 %{_libdir}/pkgconfig/*.pc
 
 #---------------------------------------------------------------------
 %prep
-%setup -q -n %{name}-%{version}~2
-%patch0 -p1 -b .glib_h~
+%setup -qn %name-%version
+%patch0 -p1
+%patch1 -p0
 
 %build
-%cmake
+%cmake -DCMAKE_INSTALL_LIBDIR=%{_lib}
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std -C build
 
 %{find_lang} %{name}
-
-mkdir -p %{buildroot}{%{_iconsdir},%{_miconsdir},%{_liconsdir}}
-convert data/cairo-dock.svg -resize 48x48 %{buildroot}%{_liconsdir}/%{name}.png
-convert data/cairo-dock.svg -resize 16x16 %{buildroot}%{_miconsdir}/%{name}.png
-convert data/cairo-dock.svg -resize 32x32 %{buildroot}%{_iconsdir}/%{name}.png
-
-%clean
-rm -rf %{buildroot}
