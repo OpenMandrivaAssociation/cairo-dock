@@ -85,7 +85,7 @@ This package provides the include files and library for cairo-dock functions.
 %patch1 -p0
 
 %build
-%cmake -DCMAKE_INSTALL_LIBDIR=%{_lib}
+%cmake -DCMAKE_INSTALL_LIBDIR=lib
 %make
 
 %install
