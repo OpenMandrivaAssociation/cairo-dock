@@ -1,0 +1,11 @@
+--- CMakeLists.txt.orig	2012-10-09 04:21:20.000000000 +0800
++++ CMakeLists.txt	2012-10-21 09:11:38.000000000 +0800
+@@ -71,7 +71,7 @@
+ 
+ ########### dependencies ###############
+ 
+-set (packages_required "glib-2.0 gthread-2.0 cairo librsvg-2.0 dbus-1 dbus-glib-1 libxml-2.0 xrender gl glu pangox libcurl")  # for the .pc and to have details
++set (packages_required "glib-2.0 gmodule-2.0 gthread-2.0 cairo librsvg-2.0 dbus-1 dbus-glib-1 libxml-2.0 xrender gl glu pangox libcurl")  # for the .pc and to have details
+ STRING (REGEX REPLACE " " ";" packages_required_semicolon ${packages_required})  # replace blank space by semicolon => to have more details if a package is missing
+ pkg_check_modules ("PACKAGE" REQUIRED "${packages_required_semicolon}")
+ 

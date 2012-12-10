@@ -1,28 +1,28 @@
 Summary:	A light and eye-candy dock to launch your programs easily
 Name:     	cairo-dock
-Version:	3.0.0
+Version:	3.1.0
 Release:	%mkrel 1
 License:	GPLv3+
 Group:		Graphical desktop/Other
-Source:		http://launchpad.net/cairo-dock-core/3.0/%{version}/+download/cairo-dock-%{version}.tar.gz
+Source0:	http://launchpad.net/cairo-dock-core/3.1/%{version}/+download/cairo-dock-%{version}.tar.gz
+Patch0:		cairo-dock-3.1.0-link.patch
 URL:		https://launchpad.net/cairo-dock-core
-Patch0:		cairo-dock-2.4.0~2-mga-fix-glib-include.patch
-Patch1:		cairo-dock-3.0.0-link.patch
-BuildRequires: pkgconfig(cairo)
-BuildRequires: pkgconfig(dbus-1)
-BuildRequires: pkgconfig(dbus-glib-1)
-BuildRequires: pkgconfig(gl)
-BuildRequires: pkgconfig(glu)
-BuildRequires: pkgconfig(gthread-2.0)
-BuildRequires: pkgconfig(gtk+-3.0)
-BuildRequires: pkgconfig(libcurl)
-BuildRequires: pkgconfig(librsvg-2.0)
-BuildRequires: pkgconfig(libxml-2.0)
-BuildRequires: pkgconfig(pangox)
-BuildRequires: pkgconfig(xcomposite)
-BuildRequires: pkgconfig(xinerama)
-BuildRequires: pkgconfig(xrender)
-BuildRequires: pkgconfig(xtst)
+BuildRequires:	pkgconfig(cairo)
+BuildRequires:	pkgconfig(dbus-1)
+BuildRequires:	pkgconfig(dbus-glib-1)
+BuildRequires:	pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(gl)
+BuildRequires:	pkgconfig(glu)
+BuildRequires:	pkgconfig(gthread-2.0)
+BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(libcurl)
+BuildRequires:	pkgconfig(librsvg-2.0)
+BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	pkgconfig(pangox)
+BuildRequires:	pkgconfig(xcomposite)
+BuildRequires:	pkgconfig(xinerama)
+BuildRequires:	pkgconfig(xrender)
+BuildRequires:	pkgconfig(xtst)
 BuildRequires:	intltool
 BuildRequires:	imagemagick
 BuildRequires:	cmake
@@ -40,6 +40,9 @@ easily plug applets into it.
 %{_datadir}/applications/*.desktop
 %{_datadir}/pixmaps/*.svg
 %{_mandir}/man1/cairo-dock.1.*
+%{_iconsdir}/%name.png
+%{_miconsdir}/%name.png
+%{_liconsdir}/%name.png
 
 #---------------------------------------------------------------------
 %define major 3
@@ -81,8 +84,7 @@ This package provides the include files and library for cairo-dock functions.
 #---------------------------------------------------------------------
 %prep
 %setup -qn %name-%version
-%patch0 -p1
-%patch1 -p0
+%patch0 -p0
 
 %build
 %cmake -DCMAKE_INSTALL_LIBDIR=lib
@@ -90,5 +92,11 @@ This package provides the include files and library for cairo-dock functions.
 
 %install
 %makeinstall_std -C build
+chmod 755 %{buildroot}%{_libdir}/libgldi.so.*
 
 %{find_lang} %{name}
+
+mkdir -p %buildroot{%_iconsdir,%_miconsdir,%_liconsdir}
+convert data/cairo-dock.svg -resize 48x48 %buildroot%_liconsdir/%name.png
+convert data/cairo-dock.svg -resize 16x16 %buildroot%_miconsdir/%name.png
+convert data/cairo-dock.svg -resize 32x32 %buildroot%_iconsdir/%name.png
