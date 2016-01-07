@@ -3,8 +3,8 @@
 
 Summary:	A light and eye-candy dock to launch your programs easily
 Name:		cairo-dock
-Version:	3.2.0
-Release:	2
+Version:	3.4.1
+Release:	1
 License:	GPLv3+
 Group:		Graphical desktop/Other
 URL:		https://launchpad.net/cairo-dock-core
