@@ -25,6 +25,7 @@ BuildRequires:	pkgconfig(xcomposite)
 BuildRequires:	pkgconfig(xinerama)
 BuildRequires:	pkgconfig(xrender)
 BuildRequires:	pkgconfig(xtst)
+BuildRequires:	fontconfig
 BuildRequires:	intltool
 BuildRequires:	imagemagick
 BuildRequires:	cmake
