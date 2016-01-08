@@ -26,6 +26,7 @@ BuildRequires:	pkgconfig(xinerama)
 BuildRequires:	pkgconfig(xrender)
 BuildRequires:	pkgconfig(xtst)
 BuildRequires:	fontconfig
+BuildRequires:	fonts-ttf-dejavu
 BuildRequires:	intltool
 BuildRequires:	imagemagick
 BuildRequires:	cmake
