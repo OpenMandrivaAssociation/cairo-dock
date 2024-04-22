@@ -105,7 +105,7 @@ This package provides plugin "help".
 #---------------------------------------------------------------------
 
 %prep
-%autosetup -p1
+%autosetup -n cairo-dock-core-%{version} -p1
 
 %build
 %cmake 
