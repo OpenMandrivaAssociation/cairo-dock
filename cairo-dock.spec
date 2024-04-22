@@ -3,12 +3,13 @@
 
 Summary:	A light and eye-candy dock to launch your programs easily
 Name:		cairo-dock
-Version:	3.4.1
-Release:	2
+Version:	3.5.0
+Release:	1
 License:	GPLv3+
 Group:		Graphical desktop/Other
-URL:		https://launchpad.net/cairo-dock-core
-Source0:	http://launchpad.net/cairo-dock-core/3.2/%{version}/+download/%{name}-%{version}.tar.gz
+URL:		https://glx-dock.org/
+Source0:  https://github.com/Cairo-Dock/cairo-dock-core/archive/refs/tags/%{version}/cairo-dock-core-%{version}.tar.gz
+#Source0:	http://launchpad.net/cairo-dock-core/3.2/%{version}/+download/%{name}-%{version}.tar.gz
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(dbus-glib-1)
@@ -104,10 +105,11 @@ This package provides plugin "help".
 #---------------------------------------------------------------------
 
 %prep
-%setup -q
+%autosetup -n cairo-dock-core-%{version} -p1
 
 %build
-%cmake -DCMAKE_INSTALL_LIBDIR=lib
+%cmake 
+#-DCMAKE_INSTALL_LIBDIR=lib
 %make
 
 %install
