@@ -110,7 +110,7 @@ This package provides plugin "help".
 %build
 %cmake 
 #-DCMAKE_INSTALL_LIBDIR=lib
-%make
+%make LDFLAGS="-Wl,--no-as-needed -lm"
 
 %install
 %makeinstall_std -C build
