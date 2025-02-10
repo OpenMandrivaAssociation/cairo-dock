@@ -108,6 +108,8 @@ This package provides plugin "help".
 %autosetup -n cairo-dock-core-%{version} -p1
 
 %build
+export CC=gcc
+export CXX=g++ 
 %cmake 
 #-DCMAKE_INSTALL_LIBDIR=lib
 %make LDFLAGS="-Wl,--no-as-needed -lm"
