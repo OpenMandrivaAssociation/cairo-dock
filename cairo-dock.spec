@@ -3,7 +3,7 @@
 
 Summary:	A light and eye-candy dock to launch your programs easily
 Name:		cairo-dock
-Version:	3.5.2
+Version:	3.6.0
 Release:	1
 License:	GPLv3+
 Group:		Graphical desktop/Other
@@ -18,6 +18,8 @@ BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(gthread-2.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:  pkgconfig(gtk-layer-shell-0)
+BuildRequires:  pkgconfig(json-c)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	pkgconfig(libxml-2.0)
@@ -31,6 +33,7 @@ BuildRequires:	fonts-ttf-dejavu
 BuildRequires:	intltool
 BuildRequires:	imagemagick
 BuildRequires:	cmake
+BuildRequires:  extra-cmake-modules
 Suggests:	cairo-dock-plugins = %{version}
 Suggests:	cairo-dock-help = %{EVRD}
 Suggests:	cairo-dock-themes
