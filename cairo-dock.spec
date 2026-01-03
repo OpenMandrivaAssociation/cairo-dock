@@ -33,6 +33,7 @@ BuildRequires:	fonts-ttf-dejavu
 BuildRequires:	intltool
 BuildRequires:	imagemagick
 BuildRequires:	cmake
+BuildRequires:  make
 BuildRequires:  extra-cmake-modules
 Suggests:	cairo-dock-plugins = %{version}
 Suggests:	cairo-dock-help = %{EVRD}
